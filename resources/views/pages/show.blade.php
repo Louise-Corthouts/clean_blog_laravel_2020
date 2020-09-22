@@ -1,13 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <h1>{{ $page->titre }}</h1>
-  <div>{{ $page->texte}}</div>
-</body>
-</html>
+{{--
+  ./resources/views/pages/show.blade.php
+  Variables disponibles :
+    $page OBJ(id, titre, sousTitre, texte, titreMenu, image, created_at, ...)
+--}}
+@extends('template.index')
+
+@section('content')
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url({{ asset('assets/img/' . $page->image) }})">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ $page->titre }}</h1>
+            <span class="subheading">{{ $page->sousTitre }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Textes -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="clearfix">
+          {!! html_entity_decode($page->texte) !!}
+        </div>
+        {{-- Ici viennent les contenus complémentaires (posts, formulaire, ...) --}}
+      </div>
+    </div>
+  </div>
+@endsection
